@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <%-include("Navbar") %>
+    <div class="flex flex-col p-16 justify-center items-center bg-slate-950">
+        <div class="grid 2xl:grid-cols-3 xl:grid-cols-2 gap-4">
+            <% blog.map((item) => { %>
+                <div class="card bg-base-100 w-96 shadow-xl">
+                    <div class="card-body">
+                      <h2 class="card-title"><%=item.title %></h2>
+                      <p id="content"><%=item.content %></p>
+                      <p><strong><%=item.author %></strong> • <%=item.createAt.toLocaleDateString() %></p>
+                      <div class="card-actions justify-end">
+                        <a href="/blog/<%=item._id%>" class="btn btn-primary text-lg mt-3 text-white">View</a>
+                      </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <%-include("Footer") %>
+</body>
+</html>
