@@ -7,9 +7,9 @@ const userSchema = mongoose.Schema({
     createAt: {type: Date, default: Date.now}
 })
 
-let User = mongoose.model("BlogUser", userSchema)
+const User = mongoose.model("BlogUser", userSchema)
 
-module.export = User
+module.exports = User
 
 module.exports.saveUser = (data) => {
     const user = new User(data)

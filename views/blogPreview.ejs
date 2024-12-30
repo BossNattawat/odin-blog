@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+</head>
+<body>
+    <%-include("Navbar") %>
+    <div class="flex flex-col p-14 items-center bg-slate-950 min-h-[85vh]">
+        <header class="flex flex-col my-10 items-center max-w-[800px]">
+            <h1 class="text-3xl font-semibold text-start mb-5"><%=blog.title %></h1>
+            <p class="text-xl"><strong><%=blog.author %></strong> • <%=blog.createAt.toLocaleDateString() %>, <%=blog.createAt.toLocaleTimeString() %></p>
+        </header>
+        <div class="max-w-[800px]">
+            <p class="text-xl"><%=blog.content %></p>
+        </div>
+        <div class="my-10 flex flex-col">
+            <h2 class="text-2xl font-semibold my-3 text-center">Comments</h2>
+            <% if(login) { %>
+                <form action="/addComment/<%=blog._id%>" method="post" class="flex flex-col items-center">
+                    <textarea rows="5" cols="50" class="textarea textarea-bordered p-5" name="comment" placeholder="Type content here!"></textarea>
+                    <button type="submit" class="btn btn-primary text-white text-xl mt-5">Add Comment</button>
+                </form>
+            <% } else { %>
+                <p class="text-xl bg-slate-800 p-5 rounded-md">Please <a href="/login" class="text-primary">Login</a> first to comment!</p>
+            <% } %>
+            
+            <% if(blog.comments.length > 0) {%>
+                <% blog.comments.map((item) => { %>
+                    <div class="flex flex-col bg-slate-800 p-5 my-4 rounded-md">
+                        <h3 class="text-xl font-semibold inline-flex items-center"> <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 16 16"
+                            fill="currentColor"
+                            class="h-6 w-6 mx-1 opacity-70">
+                            <path
+                            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+                        </svg> <%=item.author%></h3>
+                        <p class="text-lg my-3"><%=item.comment%></p>
+                        <p><%=item.createAt.toLocaleDateString() %>, <%=item.createAt.toLocaleTimeString() %></p>
+                    </div>
+                <% }) %>
+            <% }else {%>
+                <p class="my-8 text-center text-lg">There is no comment yet.</p>
+            <% } %>
+        </div>  
+    </div>
+    <%-include("Footer") %>
+</body>
+</html>

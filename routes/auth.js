@@ -9,7 +9,7 @@ router.post("/registerNewAccount", async (req, res) => {
     const { fullname, username, password, confirmPassword } = req.body;
 
     const isMatch = password === confirmPassword;
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username }).exec();
 
     if (!isMatch || existingUser) {
         return res.redirect("/register");

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const comment = mongoose.Schema({
     author: {type: String, require: true},
     comment: {type: String, require: true},
+    createAt: {type: Date, default: Date.now}
 })
 
 const postSchema = mongoose.Schema({
@@ -14,7 +15,7 @@ const postSchema = mongoose.Schema({
     createAt: {type: Date, default: Date.now}
 })
 
-let Post = mongoose.model("Post", postSchema)
+const Post = mongoose.model("Post", postSchema)
 
 module.exports = Post
 

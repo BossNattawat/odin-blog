@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link href="/css/tailwind.css" rel="stylesheet">
+</head>
+</head>
+<body>
+    <%-include("Navbar") %>
+    <div class="flex flex-col p-10 justify-center items-center h-[85vh] bg-slate-950">
+        <form action="/createNewPost" method="POST" class="flex flex-col justify-center items-start">
+            <label class="form-control">
+                <div class="label">
+                  <h2 class="text-2xl font-semibold my-3">Title</h2>
+                </div>
+                <input type="text" placeholder="Type title here" name="title" class="input input-bordered w-full max-w-xs" />
+            </label>
+            <label class="form-control">
+                <div class="label">
+                  <h2 class="text-2xl font-semibold my-3">Content</h2>
+                </div>
+                <textarea rows="10" cols="100" class="textarea textarea-bordered p-5" name="content" placeholder="Type content here!"></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary text-white text-xl mt-5">Create a post</button>
+        </form>
+    </div>
+    <%-include("Footer") %>
+</body>
+</html>
